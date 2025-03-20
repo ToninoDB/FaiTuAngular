@@ -1,1 +1,52 @@
-<p>contacts-list works!</p>
+<div class="container">
+  <h2>Rubrica Contatti</h2>
+
+  <!-- Form per l'inserimento di un nuovo contatto -->
+  <form (ngSubmit)="addContatto()">
+    <div>
+      <label for="nome">Nome:</label>
+      <input
+        type="text"
+        id="nome"
+        [(ngModel)]="newContatto.nome"
+        name="nome"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="numero">Telefono:</label>
+      <input
+        type="text"
+        id="numero"
+        [(ngModel)]="newContatto.numero"
+        name="numero"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="email">Email (opzionale):</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="newContatto.email"
+        name="email"
+      />
+    </div>
+
+    <button type="submit">Aggiungi Contatto</button>
+  </form>
+
+  <!-- Messaggio se non ci sono contatti -->
+  <p *ngIf="contatti.length === 0">Nessun contatto presente.</p>
+
+  <!-- Lista contatti -->
+  <ul *ngIf="contatti.length > 0">
+    <li *ngFor="let contact of contatti; let i = index">
+      <strong>{{ contact.nome }}</strong> - {{ contact.numero }}
+      <span *ngIf="contact.email">({{ contact.email }})</span>
+      <button (click)="removeContatto(i)">Rimuovi</button>
+    </li>
+  </ul>
+</div>
